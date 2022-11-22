@@ -12,7 +12,7 @@ const agregarTarea = async (req, res) => {
 
   if (existeProyecto.creador.toString() !== req.usuario._id.toString()) {
     const error = new Error("No tienes permisos");
-    return res.status(404).json({ msg: error.message });
+    return res.status(403).json({ msg: error.message });
   }
 
   try {
@@ -23,7 +23,22 @@ const agregarTarea = async (req, res) => {
   }
 };
 
-const obtenerTarea = async (req, res) => {};
+const obtenerTarea = async (req, res) => {
+  const { id } = req.params;
+
+  if (!existeTarea) {
+    const error = new Error("La tarea no existe");
+    return res.status(404).json({ msg: error.message });
+  }
+
+  const tarea = await Tarea.findById(id).populate("proyecto");
+
+  if (tarea.proyecto.creador.toString() !== req.usuario._id.toString()) {
+    const error = new Error("Accion no valida");
+    return res.status(403).json({ msg: error.message });
+  }
+  res.json(tarea);
+};
 
 const actualizarTarea = async (req, res) => {};
 
