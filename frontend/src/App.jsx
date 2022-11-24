@@ -5,6 +5,8 @@ import Login from "./paginas/Login";
 import NuevoPassword from "./paginas/NuevoPassword";
 import OlvidePassword from "./paginas/OlvidePassword";
 import Registrar from "./paginas/Registrar";
+import RutaProtegida from "./layouts/RutaProtegida";
+import Proyectos from "./paginas/Proyectos";
 
 import { AuthProvider } from "./context/AuthProvider";
 
@@ -20,6 +22,11 @@ const App = () => {
             <Route path="olvide-password" element={<OlvidePassword />} />
             <Route path="olvide-password/:token" element={<NuevoPassword />} />
             <Route path="confirmar/:id" element={<ConfirmarCuenta />} />
+          </Route>
+
+          {/* Area Privada */}
+          <Route path="/proyectos" element={<RutaProtegida />}>
+            <Route index element={<Proyectos />} />
           </Route>
         </Routes>
       </AuthProvider>
