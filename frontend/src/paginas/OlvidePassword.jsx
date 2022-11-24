@@ -1,13 +1,50 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import Alerta from "../components/Alerta";
+import axios from "axios";
 
 const OlvidePassword = () => {
+  const [email, setEmail] = useState("");
+  const [alerta, setAlerta] = useState({});
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (email === "") {
+      setAlerta({ msg: "El email es obligatorio", error: true });
+      return;
+    }
+
+    try {
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/usuarios/olvide-password`,
+        {
+          email,
+        }
+      );
+
+      setAlerta({ msg: data.msg, error: false });
+      console.log(data.msg);
+    } catch (error) {
+      setAlerta({
+        msg: error.response.data.msg,
+        error: true,
+      });
+    }
+  };
+
+  const { msg } = alerta;
+
   return (
     <>
       <h1 className="text-sky-500 font-black text-3xl text-center">
         Recuperar acceso y administra tus proyectos
       </h1>
-
-      <form className="my-10 bg-white shadow rounded-lg p-10">
+      {msg && <Alerta alerta={alerta} />}
+      <form
+        className="my-10 bg-white shadow rounded-lg p-10"
+        onSubmit={handleSubmit}
+      >
         <div className="my-5">
           <label className="text-gray-600 block font-bold" htmlFor="email">
             Email
@@ -17,6 +54,8 @@ const OlvidePassword = () => {
             placeholder="Email de registro"
             className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
             id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
 
