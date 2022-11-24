@@ -6,19 +6,23 @@ import NuevoPassword from "./paginas/NuevoPassword";
 import OlvidePassword from "./paginas/OlvidePassword";
 import Registrar from "./paginas/Registrar";
 
+import { AuthProvider } from "./context/AuthProvider";
+
 const App = () => {
   return (
     <BrowserRouter>
-      <Routes>
-        {/* Area Publica */}
-        <Route path="/" element={<AuthLayout />}>
-          <Route index element={<Login />} />
-          <Route path="registrar" element={<Registrar />} />
-          <Route path="olvide-password" element={<OlvidePassword />} />
-          <Route path="olvide-password/:token" element={<NuevoPassword />} />
-          <Route path="confirmar/:id" element={<ConfirmarCuenta />} />
-        </Route>
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          {/* Area Publica */}
+          <Route path="/" element={<AuthLayout />}>
+            <Route index element={<Login />} />
+            <Route path="registrar" element={<Registrar />} />
+            <Route path="olvide-password" element={<OlvidePassword />} />
+            <Route path="olvide-password/:token" element={<NuevoPassword />} />
+            <Route path="confirmar/:id" element={<ConfirmarCuenta />} />
+          </Route>
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
   );
 };
