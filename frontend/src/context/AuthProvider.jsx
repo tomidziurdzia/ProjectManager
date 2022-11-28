@@ -28,7 +28,8 @@ const AuthProvider = ({ children }) => {
       try {
         const { data } = await clienteAxios("/usuarios/perfil", config);
         setAuth(data);
-        navigate("/proyectos");
+        // Opcional que al recargar me rediriga siempre a proyectos
+        // navigate("/proyectos");
       } catch (error) {
         setAuth({});
       }
