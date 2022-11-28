@@ -36,8 +36,9 @@ const FormularioProyecto = () => {
     }
 
     // Pasar los datos hacia el provider, paso los datos
-    await submitProyecto({ nombre, descripcion, fechaEntrega, cliente });
+    await submitProyecto({ id, nombre, descripcion, fechaEntrega, cliente });
 
+    setId(null);
     setNombre("");
     setDescripcion("");
     setFechaEntrega("");
