@@ -4,9 +4,25 @@ import clienteAxios from "../config/clienteAxios";
 const ProyectosContext = createContext();
 
 const ProyectosProvider = ({ children }) => {
-  const [proyectos, setProyectos] = useState({});
+  const [proyectos, setProyectos] = useState([]);
+  const [alerta, setAlerta] = useState({});
+
+  const mostrarAlerta = (alerta) => {
+    setAlerta(alerta);
+
+    setTimeout(() => {
+      setAlerta({});
+    }, 2000);
+  };
+
+  const submitProyecto = async (proyecto) => {
+    console.log(proyecto);
+  };
+
   return (
-    <ProyectosContext.Provider value={{ proyectos, setProyectos }}>
+    <ProyectosContext.Provider
+      value={{ proyectos, setProyectos, mostrarAlerta, alerta, submitProyecto }}
+    >
       {children}
     </ProyectosContext.Provider>
   );
