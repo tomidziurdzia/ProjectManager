@@ -32,7 +32,7 @@ const FormularioColaborador = () => {
           Email Colaborador
         </label>
         <input
-          id="nombre"
+          id="email"
           type="email"
           className="border w-full mt-2 placeholder-gray-400 rounded-md p-2"
           placeholder="Email del colaborador"
