@@ -4,16 +4,12 @@ import useProyectos from "../hooks/useProyectos";
 import ModalFormularioTarea from "../components/ModalFormularioTarea";
 import ModalEliminarTarea from "../components/ModalEliminarTarea";
 import Tarea from "../components/Tarea";
+import Alerta from "../components/Alerta";
 
 const Proyecto = () => {
   const params = useParams();
-  const {
-    obtenerProyecto,
-    proyecto,
-    cargando,
-    handleModalTarea,
-    modalFormularioTarea,
-  } = useProyectos();
+  const { obtenerProyecto, proyecto, cargando, handleModalTarea, alerta } =
+    useProyectos();
 
   useEffect(() => {
     obtenerProyecto(params.id);
@@ -22,6 +18,8 @@ const Proyecto = () => {
   const { nombre } = proyecto;
 
   if (cargando) return "Cargando...";
+
+  const { msg } = alerta;
 
   return (
     <>
@@ -67,6 +65,7 @@ const Proyecto = () => {
         Nueva Tarea
       </button>
       <p className="font-bold text-xl mt-10">Tareas del Proyecto</p>
+      {msg && <Alerta alerta={alerta} />}
       <div className="bg-white shadow mt-10 rounded-lg">
         {proyecto.tareas?.length ? (
           proyecto.tareas?.map((tarea) => (
