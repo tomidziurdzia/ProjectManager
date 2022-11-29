@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 const PRIORIDAD = ["Baja", "Media", "Alta"];
 
 const ModalFormularioTarea = () => {
+  const [id, setId] = useState("");
   const [nombre, setNombre] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [prioridad, setPrioridad] = useState("");
@@ -24,7 +25,19 @@ const ModalFormularioTarea = () => {
   } = useProyectos();
 
   useEffect(() => {
-    console.log(tarea);
+    if (tarea?._id) {
+      setId(tarea._id);
+      setNombre(tarea.nombre);
+      setDescripcion(tarea.descripcion);
+      setFechaEntrega(tarea.fechaEntrega?.split("T")[0]);
+      setPrioridad(tarea.prioridad);
+      return;
+    }
+    setId("");
+    setNombre("");
+    setDescripcion("");
+    setFechaEntrega("");
+    setDescripcion("");
   }, [tarea]);
 
   const handleSubmit = async (e) => {
@@ -119,7 +132,7 @@ const ModalFormularioTarea = () => {
                     as="h3"
                     className="text-lg leading-6 font-bold text-gray-900"
                   >
-                    <p>Crear Tarea</p>
+                    {id ? "Editar Tarea" : "Crear Tarea"}
                   </Dialog.Title>
                   {msg && <Alerta alerta={alerta} />}
                   <form onSubmit={handleSubmit} className="my-10" action="">
@@ -195,7 +208,7 @@ const ModalFormularioTarea = () => {
 
                     <input
                       type="submit"
-                      value="Crear Tarea"
+                      value={id ? "Guardar Cambios" : "Crear Tarea"}
                       className="bg-sky-500 hover:bg-sky-600 w-full py-2 text-white font-bold text-center hover:cursor-pointer transition-colors rounded"
                     />
                   </form>
