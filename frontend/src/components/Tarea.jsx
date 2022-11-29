@@ -3,7 +3,7 @@ import { formatearFecha } from "../helpers/formatearFecha";
 const Tarea = ({ tarea }) => {
   const { nombre, descripcion, prioridad, fechaEntrega, _id, estado } = tarea;
   return (
-    <div className="border-b flex justify-between items-center px-2">
+    <div className="border-b flex justify-between items-center px-2 my-5">
       <div>
         <p className="mb-2 text-xl">{nombre}</p>
         <p className="mb-2 text-sm text-gray-500">{descripcion}</p>
