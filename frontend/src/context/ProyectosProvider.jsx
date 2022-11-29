@@ -245,7 +245,12 @@ const ProyectosProvider = ({ children }) => {
         config
       );
 
-      // TODO: Actualizar DOM
+      // Actualizar el State con la tarea
+      const proyectoActualizado = { ...proyecto };
+      proyectoActualizado.tareas = proyectoActualizado.tareas.map(
+        (tareaState) => (tareaState._id === data._id ? data : tareaState)
+      );
+      setProyecto(proyectoActualizado);
 
       setAlerta({});
       setModalFormularioTarea(false);
