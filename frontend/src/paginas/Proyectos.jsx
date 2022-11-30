@@ -9,14 +9,6 @@ let socket;
 const Proyectos = () => {
   const { proyectos, alerta } = useProyectos();
 
-  useEffect(() => {
-    socket = io(import.meta.env.VITE_BACKEND_URL);
-    socket.emit("prueba", proyectos);
-    socket.on("respuesta", (persona) => {
-      console.log("Respuesta desde backend", persona);
-    });
-  });
-
   const { msg } = alerta;
   return (
     <>
