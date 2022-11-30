@@ -26,9 +26,7 @@ const Proyecto = () => {
 
   const { msg } = alerta;
 
-  return msg && alerta.error ? (
-    <Alerta alerta={alerta} />
-  ) : (
+  return (
     <>
       <div className="flex justify-between">
         <h1 className="font-black text-3xl">{nombre}</h1>
@@ -77,7 +75,6 @@ const Proyecto = () => {
         </button>
       )}
       <p className="font-bold text-xl mt-10">Tareas del Proyecto</p>
-      {msg && <Alerta alerta={alerta} />}
       <div className="bg-white shadow mt-10 rounded-lg">
         {proyecto.tareas?.length ? (
           proyecto.tareas?.map((tarea) => (
