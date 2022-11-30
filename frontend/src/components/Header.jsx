@@ -5,14 +5,15 @@ const Header = () => {
     <header className="px-4 py-5 bg-white border-b">
       <div className="md:flex md:justify-between">
         <Link to="/proyectos">
-          <h2 className="text-2xl font-black text-sky-500">Project Manager</h2>
+          <h2 className="text-2xl font-black mb-5 md:mb-0 text-sky-500">
+            Project Manager
+          </h2>
         </Link>
-        <input
-          type="search"
-          placeholder="Buscar Proyecto"
-          className="rounded-lg lg:w-96 block p-2 border"
-        />
-        <div className="flex items-center gap-4">
+
+        <div className="flex flex-col md:flex-row items-center gap-4">
+          <button type="button" className="font-bold">
+            Buscar Proyecto
+          </button>
           <Link to="/proyectos" className="font-bold">
             Proyectos
           </Link>

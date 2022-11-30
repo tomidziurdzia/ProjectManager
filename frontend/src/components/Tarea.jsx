@@ -22,7 +22,7 @@ const Tarea = ({ tarea }) => {
           </p>
         )}
       </div>
-      <div className="flex gap-2">
+      <div className="flex gap-2 flex-col lg:flex-row">
         {admin && (
           <button
             className="bg-indigo-500 px-4 py-3 text-white font-bold text-sm text-center rounded-lg"
