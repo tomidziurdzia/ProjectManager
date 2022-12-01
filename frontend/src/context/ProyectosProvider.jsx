@@ -260,15 +260,11 @@ const ProyectosProvider = ({ children }) => {
         config
       );
 
-      // Actualizar el State con la tarea
-      const proyectoActualizado = { ...proyecto };
-      proyectoActualizado.tareas = proyectoActualizado.tareas.map(
-        (tareaState) => (tareaState._id === data._id ? data : tareaState)
-      );
-      setProyecto(proyectoActualizado);
-
       setAlerta({});
       setModalFormularioTarea(false);
+
+      // Socket
+      socket.emit("actualizar tarea", data);
     } catch (error) {
       console.log(error);
     }
@@ -473,6 +469,15 @@ const ProyectosProvider = ({ children }) => {
     setProyecto(proyectoActualizado);
   };
 
+  const actualizarTareaProyecto = (tarea) => {
+    // Actualizar el State con la tarea
+    const proyectoActualizado = { ...proyecto };
+    proyectoActualizado.tareas = proyectoActualizado.tareas.map((tareaState) =>
+      tareaState._id === tarea._id ? tarea : tareaState
+    );
+    setProyecto(proyectoActualizado);
+  };
+
   return (
     <ProyectosContext.Provider
       value={{
@@ -506,6 +511,7 @@ const ProyectosProvider = ({ children }) => {
         buscador,
         submitTareasProyecto,
         eliminarTareaProyecto,
+        actualizarTareaProyecto,
       }}
     >
       {children}
